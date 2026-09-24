@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  db-fitlog:
+    image: postgres:16-alpine
+    container_name: postgres-fitlog
+    env_file:
+      - .env # Inyecta las variables exclusivas del contenedor
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_is:/var/lib/postgresql/data
+
+volumes:
+  postgres_data_is:

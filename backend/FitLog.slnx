@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FitLog.API/FitLog.API.csproj" />
+  <Project Path="FitLog.Application/FitLog.Application.csproj" />
+  <Project Path="FitLog.Domain/FitLog.Domain.csproj" />
+  <Project Path="FitLog.Infrastructure/FitLog.Infrastructure.csproj" />
+</Solution>
