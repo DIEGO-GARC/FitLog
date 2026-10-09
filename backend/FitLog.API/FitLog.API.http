@@ -1,14 +1,33 @@
-@FitLog.API_HostAddress = http://localhost:5095
+# Variable de servidor
+@API_HostAddress = http://localhost:5095
+# Variable de ID de prueba.
+@TEST_ID = 11 
 
-###
-GET http://localhost:5095/api/exercises
-Accept: application/json
-
-
-###
-POST http://localhost:5095/api/exercises
+### Creación de ejercicio
+POST {{API_HostAddress}}/api/exercises
 Content-Type: application/json
 
 {
-  "name": "Press en Banco Plano"
+  "name": "Nuevo Ejercicio"
 }
+
+### Lectura de todos los ejercicios
+GET {{API_HostAddress}}/api/Exercises
+Accept: application/json
+
+### Actualización de un ejercicio por id
+PUT {{API_HostAddress}}/api/Exercises/
+Content-Type: application/json
+
+{
+ "id" : {{TEST_ID}},
+ "newName" : "Ejercicio Editado" 
+}
+
+### Lectura de un ejercicio por id
+GET {{API_HostAddress}}/api/Exercises/{{TEST_ID}}
+Accept: application/json
+
+
+### Eliminación de un ejercicio por id
+DELETE {{API_HostAddress}}/api/Exercises/{{TEST_ID}}
