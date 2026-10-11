@@ -11,4 +11,7 @@ public class FitLogDbContext : DbContext
 
     // Representación de tabla Exercises
     public DbSet<Exercise>  Exercises { get; set; }
+    
+    // Representación de la tabla Routines
+    public DbSet<Routine> Routines { get; set; }
 }

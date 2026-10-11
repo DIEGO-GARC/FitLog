@@ -33,9 +33,43 @@ namespace FitLog.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("RoutineId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("RoutineId");
+
                     b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("FitLog.Domain.Entities.Routine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Series")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Routines");
+                });
+
+            modelBuilder.Entity("FitLog.Domain.Entities.Exercise", b =>
+                {
+                    b.HasOne("FitLog.Domain.Entities.Routine", "Routine")
+                        .WithMany()
+                        .HasForeignKey("RoutineId");
+
+                    b.Navigation("Routine");
                 });
 #pragma warning restore 612, 618
         }
