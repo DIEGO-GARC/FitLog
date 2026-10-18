@@ -17,6 +17,7 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString));
         
         services.AddScoped<IExerciseRepository, ExerciseRepository>();
+        services.AddScoped<IRoutineRepository, RoutineRepository>();
         
         return services;
 

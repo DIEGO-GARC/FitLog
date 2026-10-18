@@ -7,16 +7,16 @@ public interface IExerciseRepository
 {
 
     // Método para agregar un ejercicio
-    Task<Exercise> AddAsync(Exercise exercise);
+    Task<(Exercise exercise, string? routineName)> AddAsync(Exercise exercise);
     
     // Método para obtener todos los ejercicios
-    Task<IEnumerable<Exercise>> GetAllAsync();
+    Task<IEnumerable<(Exercise exercise, string? routineName)>> GetAllAsync();
 
     // Método para obtener un ejercicio mediante su id
     Task<Exercise> GetByIdAsync(int id);
     
     // Método para actualizar un ejercicio mediante su id
-    Task<Exercise> UpdateAsync(int id, string newName);
+    Task<Exercise> UpdateAsync(int id, string newName, int? newRoutineId);
     
     // Método para borrar un ejercicio mediante su id
     Task<bool> DeleteAsync(int id);

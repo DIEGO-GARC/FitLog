@@ -5,4 +5,5 @@ public class UpdateExerciseRequestDto
 {
     public int Id { get; set; }
     public string NewName { get; set; } = string.Empty;
+    public int? NewRoutineId { get; set; }
 }

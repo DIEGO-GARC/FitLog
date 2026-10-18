@@ -17,6 +17,10 @@ public class UpdateExerciseValidator : AbstractValidator<UpdateExerciseRequestDt
         // Creando regla para el id
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("El ID del ejercicio no puede estar vacío.")
-            .GreaterThan(0).WithMessage("El ID del ejercicio debe ser  maoyr a 0.");
+            .GreaterThan(0).WithMessage("El ID del ejercicio debe ser  mayor a 0.");
+        
+        RuleFor(x => x.NewRoutineId)
+            .GreaterThan(0).WithMessage("El ID del ejercicio debe ser  mayor a 0.");
+        
     }
 }

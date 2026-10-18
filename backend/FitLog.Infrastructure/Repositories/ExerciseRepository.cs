@@ -19,13 +19,15 @@ public class ExerciseRepository : IExerciseRepository
     }
 
     // Método para agregar un ejercicio
-    public async Task<Exercise> AddAsync(Exercise exercise)
+    public async Task<(Exercise exercise, string? routineName)> AddAsync(Exercise exercise)
     {
         await _context.Exercises.AddAsync(exercise);
         
         await _context.SaveChangesAsync();
         
-        return exercise;
+        var routineName = _context.Routines.FirstOrDefault(x => x.Id == exercise.RoutineId)?.Name;
+        
+        return (exercise, routineName);
     }
     
     // Método para obtener todos los ejercicios
@@ -41,11 +43,12 @@ public class ExerciseRepository : IExerciseRepository
     }
     
     // Método para actualizar un ejercicio mediante su id
-    public async Task<Exercise> UpdateAsync(int id, string newName)
+    public async Task<Exercise> UpdateAsync(int id, string newName, int? newRoutineId)
     {
         var exercise = await _context.Exercises.FindAsync(id);
 
         exercise.Name = newName;
+        exercise.RoutineId = newRoutineId;
         
         var rowsAffected = await _context.SaveChangesAsync();
         

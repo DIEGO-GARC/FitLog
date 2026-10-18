@@ -55,9 +55,6 @@ namespace FitLog.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Series")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.ToTable("Routines");

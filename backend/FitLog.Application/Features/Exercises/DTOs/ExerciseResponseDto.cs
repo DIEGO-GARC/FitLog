@@ -5,4 +5,5 @@ public class ExerciseResponseDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
+    public string? RoutineName { get; set; } = string.Empty;
 }

@@ -41,16 +41,18 @@ public class ExercisesController : ControllerBase
         // Creando objeto ejercicio
         var newExercise = new Exercise
         {
-            Name = request.Name
+            Name = request.Name,
+            RoutineId = request.RoutineId
         };
         
         // Llamando a método de creación y guardando resultado
-        var exerciseCreated = await _repository.AddAsync(newExercise);
+        var dataCreated = await _repository.AddAsync(newExercise);
 
         var response = new ExerciseResponseDto
         {
-            Id = exerciseCreated.Id,
-            Name = exerciseCreated.Name
+            Id = dataCreated.exercise.Id,
+            Name = dataCreated.exercise.Name,
+            RoutineName = dataCreated.routineName
         };
         
         return CreatedAtAction(nameof(GetExercises), new {id = response.Id}, response);
@@ -67,7 +69,8 @@ public class ExercisesController : ControllerBase
         var response = exercises.Select(ex => new ExerciseResponseDto
         {
             Id = ex.Id,
-            Name = ex.Name
+            Name = ex.Name,
+            RoutineName = ex.Routine?.Name
         });
         
         return Ok(response);
@@ -92,7 +95,8 @@ public class ExercisesController : ControllerBase
         var response = new ExerciseResponseDto()
         {
             Id = exercise.Id,
-            Name = exercise.Name
+            Name = exercise.Name,
+            RoutineName = exercise.Routine?.Name
         };
 
         return Ok(response);
@@ -108,7 +112,7 @@ public class ExercisesController : ControllerBase
         {
             return BadRequest(validationResult.Errors);
         }
-        
+
         var exercise = await _repository.GetByIdAsync(request.Id);
         
         if (exercise is null)
@@ -116,7 +120,7 @@ public class ExercisesController : ControllerBase
             return NotFound(new {message = "Ejercicio no encontrado"});
         }
         
-        await _repository.UpdateAsync(request.Id,  request.NewName);
+        await _repository.UpdateAsync(request.Id,  request.NewName, request.NewRoutineId);
         
         return NoContent();
     }
