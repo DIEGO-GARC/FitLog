@@ -68,9 +68,9 @@ public class ExercisesController : ControllerBase
         // Empaquetando los ejercicios en un DTO de respuesta
         var response = exercises.Select(ex => new ExerciseResponseDto
         {
-            Id = ex.Id,
-            Name = ex.Name,
-            RoutineName = ex.Routine?.Name
+            Id = ex.exercise.Id,
+            Name = ex.exercise.Name,
+            RoutineName = ex.routineName
         });
         
         return Ok(response);
@@ -85,18 +85,18 @@ public class ExercisesController : ControllerBase
             return BadRequest(new {message = "El ID debe ser mayor a 0"});
         }
 
-        var exercise = await _repository.GetByIdAsync(id);
+        var data = await _repository.GetByIdAsync(id);
 
-        if (exercise is null)
+        if (data is null)
         {
             return NotFound(new {message = $"El ejercicio con ID {id} no fue encontrado"});
         }
 
         var response = new ExerciseResponseDto()
         {
-            Id = exercise.Id,
-            Name = exercise.Name,
-            RoutineName = exercise.Routine?.Name
+            Id = data.Value.exercise.Id,
+            Name = data.Value.exercise.Name,
+            RoutineName = data.Value.routineName
         };
 
         return Ok(response);
@@ -113,9 +113,9 @@ public class ExercisesController : ControllerBase
             return BadRequest(validationResult.Errors);
         }
 
-        var exercise = await _repository.GetByIdAsync(request.Id);
+        var data = await _repository.GetByIdAsync(request.Id);
         
-        if (exercise is null)
+        if (data is null)
         {
             return NotFound(new {message = "Ejercicio no encontrado"});
         }
@@ -135,9 +135,9 @@ public class ExercisesController : ControllerBase
             return BadRequest(new {message = "El ID debe ser mayor a 0"});
         }
 
-        var exercise = await _repository.GetByIdAsync(id);
+        var data = await _repository.GetByIdAsync(id);
 
-        if (exercise is null)
+        if (data is null)
         {
             return NotFound(new {message = $"El ejercicio con ID {id} no fue encontrado"});
         }

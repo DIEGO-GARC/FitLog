@@ -17,5 +17,5 @@ public interface IRoutineRepository
     Task<Routine> UpdateAsync(int id, string newName);
     
     // Método para borrar una rutina mediante su id
-   // Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteAsync(int id);
 }

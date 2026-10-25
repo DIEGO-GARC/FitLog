@@ -120,4 +120,26 @@ public class RoutinesController : ControllerBase
         return NoContent();
     }
     
+    // Endpoint DELETE para eliminar una rutina mediante su id
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteRoutineById([FromRoute] int id)
+    {
+        if (id < 1)
+        {
+            return BadRequest(new {message = "El ID debe ser mayor a 0"});
+        }
+
+        var data = await _repository.GetByIdAsync(id);
+
+        if (data is null)
+        {
+            return NotFound(new {message = $"La rutina con ID {id} no fue encontrado"});
+        }
+
+        await _repository.DeleteAsync(id);
+        
+        return NoContent();
+
+    }
+    
 }

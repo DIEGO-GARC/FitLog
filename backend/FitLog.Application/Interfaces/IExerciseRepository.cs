@@ -13,7 +13,7 @@ public interface IExerciseRepository
     Task<IEnumerable<(Exercise exercise, string? routineName)>> GetAllAsync();
 
     // Método para obtener un ejercicio mediante su id
-    Task<Exercise> GetByIdAsync(int id);
+    Task<(Exercise exercise, string? routineName)?> GetByIdAsync(int id);
     
     // Método para actualizar un ejercicio mediante su id
     Task<Exercise> UpdateAsync(int id, string newName, int? newRoutineId);

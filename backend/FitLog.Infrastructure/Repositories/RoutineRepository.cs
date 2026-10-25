@@ -51,4 +51,26 @@ public class RoutineRepository : IRoutineRepository
         
         return routine;
     }
+    
+    // Método para borrar una rutina mediante su id
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var routine = await _context.Routines.FindAsync(id);
+        
+        // Buscar los ejercicios que referencian esta rutina
+        var ejerciciosAfectados = await _context.Exercises
+            .Where(e => e.RoutineId == id)
+            .ToListAsync();
+
+        // Poner en null la referencia antes de borrar la rutina
+        foreach (var ejercicio in ejerciciosAfectados)
+        {
+            ejercicio.RoutineId = null;
+        }
+        
+        _context.Routines.Remove(routine);
+        var rowsAffected = await _context.SaveChangesAsync();
+        
+        return true;
+    }
 }
