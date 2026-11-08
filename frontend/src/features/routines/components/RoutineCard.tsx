@@ -1,9 +1,6 @@
-export interface RoutineProps {
-    id: number;
-    nombre: string;
-}
+import type { Routine } from '../types/routine.types'
 
-export function RoutineCard({ id, nombre }: RoutineProps) {
+export function RoutineCard({ id, name }: Routine) {
     return (
         <article className="group relative bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-xl p-5 flex flex-col justify-between hover:border-orange-500/50 hover:bg-white/[0.07] transition-colors">
             {/* Retazo naranja: una línea fina que se alarga al pasar el cursor */}
@@ -23,7 +20,7 @@ export function RoutineCard({ id, nombre }: RoutineProps) {
                 
                 {/* Nombre de la Rutina */}
                 <h3 className="text-lg font-semibold tracking-tight text-white mb-5">
-                    {nombre}
+                    {name}
                 </h3>
             </div>
 
